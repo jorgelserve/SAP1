@@ -1,2 +1,1 @@
-# SAP1
-Simple-As-Possible computer.
+# SAP1 (Simple-As-Possible)
