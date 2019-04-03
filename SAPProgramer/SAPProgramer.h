@@ -16,13 +16,18 @@ class SAPProgramer {
 		SAPProgramer(uint8_t ENram, uint8_t WEram);
 		void lda(uint8_t data);
 		void add(uint8_t data);
-		void sub(uint8_t data);
-		void out(void);
-		void hlt(void);
+		//void sub(uint8_t data);
+		//void out(void);
+		//void hlt(void);
+
 	private:
 		uint8_t _ENram;
 		uint8_t _WEram;
 		uint8_t _addres;
-}
+
+		void _write(void);
+		void _read(void);
+		void _disable(void);
+};
 
 #endif

@@ -6,14 +6,8 @@
 	https://creativecommons.org/licenses/by/4.0/
 */
 
-#if !defined(ARDUINO_AVR_MEGA2560)
-  #error Solo se soporta Arduino Mega 2560
-#endif
-
 #include "Arduino.h"
 #include "SAPProgramer.h"
-#include "defs.h"
-
 
 SAPProgramer::SAPProgramer(uint8_t ENram, uint8_t WEram) {
 	pinMode(ENram, OUTPUT);
@@ -21,29 +15,53 @@ SAPProgramer::SAPProgramer(uint8_t ENram, uint8_t WEram) {
 	digitalWrite(ENram, HIGH);
 	DDRB = B00001111;
 	DDRK = B11111111;
-	PORTB = B00000000;
-	PORTK = B00000000;
+	
 
 	_addres = 0;
+
 	_ENram = ENram;
 	_WEram = WEram;
-	
 }
 
-void SAPProgramer::lda(int data) {
+void SAPProgramer::lda(uint8_t data) {
+	_write();
+	PORTB = B00000000;
 	if (!_addres) {
+		for(; _addres < 16; _addres++) {
+			PORTB = _addres;
+			PORTK = ~B00000000;
+			delay(10);
+		}
+		_addres = 0;
 		PORTB = _addres;
-		PORTK = data;
+		PORTK = ~data;
+		delay(10);
 		_addres += 1;
-	} else {
-		PORTK = 0;
 	}
 }
 
-// void SAPProgramer::add(int data) {
-// 	if (_addres) {
-// 		PORTK 
-// 	}
-// }
+void SAPProgramer::add(uint8_t data) {
+	_write();
+	if (_addres < 16) {
+		PORTB = _addres;
+		PORTK = ~((B0001<<4) + data);
+		delay(100);
+		_addres += 1; 
+	}
+}
 
 
+void SAPProgramer::_write() { 
+	digitalWrite(_ENram, LOW);
+	digitalWrite(_WEram, LOW);
+}
+
+void SAPProgramer::_read() { 
+	digitalWrite(_ENram, LOW);
+	digitalWrite(_WEram, HIGH);
+}
+
+void SAPProgramer::_disable() { 
+	digitalWrite(_ENram, HIGH);
+	digitalWrite(_WEram, HIGH);
+}
