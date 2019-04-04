@@ -16,8 +16,8 @@ class SAPProgramer {
 		SAPProgramer(uint8_t ENram, uint8_t WEram);
 		void lda(uint8_t data);
 		void add(uint8_t data);
-		//void sub(uint8_t data);
-		//void out(void);
+		void sub(uint8_t data);
+		void out(void);
 		//void hlt(void);
 
 	private:
