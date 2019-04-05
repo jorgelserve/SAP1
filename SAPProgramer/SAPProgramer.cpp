@@ -60,21 +60,21 @@ void SAPProgramer::sub(uint8_t data) {
 	}
 }
 
-void SAPProgramer::out(uint8_t data) {
+void SAPProgramer::out(void) {
 	_write();
 	if (_addres < 16) {
 		PORTB = _addres;
-		PORTK = ~((B1110<<4) + data);
+		PORTK = ~((B1110<<4) + 0);
 		delay(100);
 		_addres += 1; 
 	}
 }
 
-void SAPProgramer::hlt(uint8_t data) {
+void SAPProgramer::hlt(void) {
 	_write();
 	if (_addres < 16) {
 		PORTB = _addres;
-		PORTK = ~((B1111<<4) + data);
+		PORTK = ~((B1111<<4) + 0);
 		delay(100);
 		_addres += 1; 
 	}

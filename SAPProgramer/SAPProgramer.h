@@ -18,7 +18,7 @@ class SAPProgramer {
 		void add(uint8_t data);
 		void sub(uint8_t data);
 		void out(void);
-		//void hlt(void);
+		void hlt(void);
 
 	private:
 		uint8_t _ENram;

@@ -1,3 +1,7 @@
 SAPProgramer	KEYWORD1
 lda				KEYWORD2
 add				KEYWORD2
+sub				KEYWORD2
+hlt				KEYWORD2
+out				KEYWORD2
+
