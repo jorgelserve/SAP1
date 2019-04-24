@@ -1,6 +1,6 @@
 #include <SAPProgramer.h>
 
-SAPProgramer SAP1(3,4);
+SAPProgramer SAP1(48, 47);
 
 void setup() {
 	SAP1.lda(3);
@@ -8,6 +8,9 @@ void setup() {
 	SAP1.sub(1);
 	SAP1.out();
 	SAP1.hlt();
+	DDRD = B00000000;
 }
 
-void loop() {}
+void loop() {
+	PORTK = PIND;
+}
